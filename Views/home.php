@@ -11,7 +11,7 @@
     <title>ホーム画面 / Twitterクローン</title>
     <meta name="description" content="ホーム画面です">
 </head>
-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
+
 <body class="home">
     <div class="container">
 
