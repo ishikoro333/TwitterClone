@@ -28,5 +28,5 @@ $(function(){
             $(this).find('img').attr('src','../Views/img/icon-heart-twitterblue.svg');
 
         }
-    })
+    });
 })
