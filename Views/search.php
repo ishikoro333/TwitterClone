@@ -38,35 +38,26 @@ $view_tweets = [
 <html lang="ja"><!--日本語サイト-->
 <head >
     <?php include_once('../Views/common/head.php'); ?>
-    <title>ホーム画面 / Twitterクローン</title>
-    <meta name="description" content="ホーム画面です">
+    <title>検索画面 / Twitterクローン</title>
+    <meta name="description" content="検索画面です">
 </head>
 
-<body class="home">
+<body class="home search text-center">
     <div class="container">
         <?php include_once('../Views/common/side.php'); ?>
         <div class="main">
             <div class="main-header">
-                <h1>ホーム</h1>
+                <h1>検索</h1>
             </div>
-            <!--つぶやき投稿エリア-->
-            <div class="tweet-post">
-                <div class="my-icon">
-                    <img src="<?php echo HOME_URL; ?>Views/img_uploaded/user/sample-person.jpg" alt="">
+          
+            <!-- 検索エリア -->
+            <form action="search.php" method="get">
+                <div class="search-area">
+                    <input type="text" class="form-control" placeholder="キーワード検索" name="keyword" value="">
+                    <button type="submit" class="btn">検索</button>
                 </div>
-                <div class="input-area">
-                    <form action="post.php" method="post" enctype="multipart/form-data"><!--enctype:ファイルを送信する命令-->
-                        <!--placeholder：背景文字-->
-                        <textarea name="body" placeholder="いまどうしてる？"　maxlength="140"></textarea>
-                        <div class="bottom-area">
-                            <div class="mb-0"><!--mb-0,form-control:bootstrapのタグ-->
-                                <input type="file" name="image" class="form-control form-contril-sm">
-                            </div>
-                            <button class="btn" type="submit">つぶやく</button><!--submit:入力データを送信-->
-                        </div>
-                    </form>
-                </div>
-            </div>
+            </form>
+
             <!--仕切りエリア-->
             <div class="ditch"></div>
 
