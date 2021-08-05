@@ -48,7 +48,7 @@
  * ツイート一覧を取得
  * 
  *@param array $user ログインしているユーザー情報
- *@return bool
+ *@return array|false
  */
 
 function findTweets(array $user)
@@ -78,9 +78,9 @@ function findTweets(array $user)
             U.nickname AS user_nickname,
             U.image_name AS user_image_name,
             -- ログインユーザーがいいね！したか(いいね！している場合、値が入る)
-            L.ID AS likes_id,
+            L.ID AS like_id,
             -- いいね！数
-            (SELECT COUNT(*) FROM likes WHERE status = 'active' AND tweet_id = T.id) AS likes_count
+            (SELECT COUNT(*) FROM likes WHERE status = 'active' AND tweet_id = T.id) AS like_count
         FROM
             tweets AS T
             -- ユーザーテーブルをusers.idとtweets.user_idで紐付ける

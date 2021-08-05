@@ -16,8 +16,8 @@ $view_tweets = [
         'tweet_body' => '今プログラミングをしています。',
         'tweet_image_name' => null,
         'tweet_created_at' => '2021-03-15 14:00:00',
-        'likes_id' => null,
-        'likes_count' => 0,
+        'like_id' => null,
+        'like_count' => 0,
     ],
 ];
 

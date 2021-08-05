@@ -12,7 +12,7 @@ include_once '../util.php';
 include_once '../Models/tweets.php';
 
 
-// TODO:ログインチェック
+// ログインチェック
 $user = getUserSession();
 if (!$user){
     //ログインしていない

@@ -18,9 +18,9 @@
                             <?php endif;?>
 
                             <div class="icon-list">
-                                <div class="likes js-likes" data-likes-id="<?php echo htmlspecialchars($view_tweet['likes_id']); ?>">
+                                <div class="like js-like" data-tweet-id="<?php echo htmlspecialchars($view_tweet['tweet_id']); ?>" data-like-id="<?php echo htmlspecialchars($view_tweet['like_id']); ?>">
                                     <?php
-                                    if (isset($view_tweet['likes_id'])) {
+                                    if (isset($view_tweet['like_id'])) {
                                         //いいねしている場合は、青のハート
                                         echo '<img src="' . HOME_URL . 'Views/img/icon-heart-twitterblue.svg" alt="">';                                
                                     } else {
@@ -29,7 +29,7 @@
                                     }
                                     ?>                                    
                                 </div>
-                                <div class="likes-count js-likes-count"><?php echo htmlspecialchars($view_tweet['likes_count']); ?></div>
+                                <div class="like-count js-like-count"><?php echo htmlspecialchars($view_tweet['like_count']); ?></div>
                             </div>
                         </div>
                     </div>
