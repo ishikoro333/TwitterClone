@@ -224,12 +224,12 @@ main
 .home .tweet-list .tweet .content .icon-list{
     display: flex;
 }
-.home .tweet-list .tweet .content .icon-list .like img{
+.home .tweet-list .tweet .content .icon-list .likes img{
     width: 25px;
     margin-right: 10px;
     cursor: pointer;
 }
-.home .tweet-list .tweet .content .icon-list .like-count{
+.home .tweet-list .tweet .content .icon-list .likes-count{
     width: 25px;
     margin-right: 2px;
     color: #444;

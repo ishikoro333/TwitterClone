@@ -45,57 +45,66 @@
  }
 
 /**
- * ユーザー情報取得:ログインチェック
+ * ツイート一覧を取得
  * 
- * @param string $email
- * @param string $password
- * @return array|false
+ *@param array $user ログインしているユーザー情報
+ *@return bool
  */
-function findUserAndCheckPassword(string $email, string $password)
+
+function findTweets(array $user)
 {
-    //DB接続
-    $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+      //DB接続
+      $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-    //接続エラーがある場合->処理停止
-    if ($mysqli->connect_errno){
-        echo 'MySQLの接続に失敗しました。: ' .$mysqli -> connect_error ."\n";
-        exit;
-    }
+      //接続エラーがある場合->処理を停止
+      if($mysqli->connect_errno){
+         echo 'MySQLの接続に失敗しました。:'  . $mysqli->connect_error . "\n";
+         exit;
+      }
 
-    //入力値をエスケープ
-    $email = $mysqli->real_escape_string($email);
+      //ログインユーザーIDをエスケープ
+      $login_user_id = $mysqli->real_escape_string($user['id']);
+
+      //検索のsqlクエリを作成
+      $query = <<<SQL
+        SELECT
+            T.id AS tweet_id,
+            T.status AS tweet_status,
+            T.body AS tweet_body,
+            T.image_name AS tweet_image_name,
+            T.created_at AS tweet_created_at,
+            U.id AS user_id,
+            U.name AS user_name,
+            U.nickname AS user_nickname,
+            U.image_name AS user_image_name,
+            -- ログインユーザーがいいね！したか(いいね！している場合、値が入る)
+            L.ID AS likes_id,
+            -- いいね！数
+            (SELECT COUNT(*) FROM likes WHERE status = 'active' AND tweet_id = T.id) AS likes_count
+        FROM
+            tweets AS T
+            -- ユーザーテーブルをusers.idとtweets.user_idで紐付ける
+            JOIN
+            users AS U ON U.id = T.user_id AND U.status = 'active'
+            -- いいね！テーブルをlikes.tweet_idとtweets.idで紐づける
+            LEFT JOIN
+            likes AS L ON L.tweet_id = T.id AND L.status = 'active' AND L.user_id = '$login_user_id'
+        WHERE
+            T.status = 'active'
+        
+      SQL;
     
-    //sqlクエリを作成
-    // - 外部からのリクエストは何が入ってくるかわからないため、必ず、エスケープしたものをクオートで囲む
-    $query = 'SELECT * FROM users WHERE email = "'. $email . '"';
+      //クエリ実行
+      $result = $mysqli->query($query);
+      if ($result){
+          //データを配列で受け取る
+          $response = $result->fetch_all(MYSQLI_ASSOC);
+      }else{
+          $response = false;
+          echo 'エラーメッセージ:' . $mysqli->error . "\n";
+      }
 
-    //クエリを実行
-    $result = $mysqli->query($query);
+      $mysqli->close();
 
-    //クエリ実行に失敗した場合->return
-    if(!$result){
-        //MySQL処理中にエラー発生
-        echo 'エラーメッセージ:' . $mysqli->error . "\n";
-        $mysqli->close();
-        return false;
+      return $response;
     }
-
-    //ユーザー情報を取得
-    $user  = $result->fetch_array(MYSQLI_ASSOC);
-    //ユーザーが存在しない場合->return
-    if(!$user){
-        $mysqli->close();
-        return false;
-    }
-
-    //パスワードチェック、不一致の場合->return
-    if(!password_verify($password, $user['password'])){
-        $mysqli->close();
-        return false;
-    }
-
-    //DBを開放
-    $mysqli->close();
-
-    return $user;
-}

@@ -16,8 +16,8 @@ $view_tweets = [
         'tweet_body' => '今プログラミングをしています。',
         'tweet_image_name' => null,
         'tweet_created_at' => '2021-03-15 14:00:00',
-        'like_id' => null,
-        'like_count' => 0,
+        'likes_id' => null,
+        'likes_count' => 0,
     ],
     [
         'user_id' => 2,
@@ -27,8 +27,8 @@ $view_tweets = [
         'tweet_body' => 'コワーキングスペースをオープンしました。',
         'tweet_image_name' => 'sample-post.jpg',
         'tweet_created_at' => '2021-03-15 14:00:00',
-        'like_id' => 1,
-        'like_count' => 1,
+        'likes_id' => 1,
+        'likes_count' => 1,
     ],
 ];
 ?>

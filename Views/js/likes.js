@@ -4,26 +4,26 @@
 
 $(function(){
     //いいねがクリックされた時
-    $('.js-like').click(function(){
+    $('.js-likes').click(function(){
         const this_obj =$(this);
-        const like_id =$(this).data('like-id');
-        const like_count_obj =$(this).parent().find('.js-like-count');
-        let like_count = Number(like_count_obj.html());
+        const likes_id =$(this).data('likes-id');
+        const likes_count_obj =$(this).parent().find('.js-likes-count');
+        let likes_count = Number(likes_count_obj.html());
 
-        if(like_id) {
+        if(likes_id) {
             //いいね！取り消し
             //いいね！カウントを減らす
-            like_count--;
-            like_count_obj.html(like_count);
-            this_obj.data('like-id',null);
+            likes_count--;
+            likes_count_obj.html(likes_count);
+            this_obj.data('likes-id',null);
             //いいね！ボタンの色をグレーに変更
             $(this).find('img').attr('src','../Views/img/icon-heart.svg');
         } else{
             //いいね！付与
             //いいね！カウントを増やす
-            like_count++;
-            like_count_obj.html(like_count);
-            this_obj.data('like-id',true);
+            likes_count++;
+            likes_count_obj.html(likes_count);
+            this_obj.data('likes-id',true);
             //いいね！ボタンの色を青に変更
             $(this).find('img').attr('src','../Views/img/icon-heart-twitterblue.svg');
 
