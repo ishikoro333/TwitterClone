@@ -11,7 +11,6 @@ include_once '../util.php';
 //ツイートデータ操作モデルを読み込む
 include_once '../Models/tweets.php';
 
-
 // ログインチェック
 $user = getUserSession();
 if (!$user){
