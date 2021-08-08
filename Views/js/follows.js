@@ -7,7 +7,7 @@ $(function(){
         const this_obj = $(this);
         const followed_user_id = $(this).data('followed-user-id');
         const follow_id = $(this).data('follow-id');
-        
+        cache: false
         if (follow_id) {
             // フォロー取り消し
             $.ajax({
